@@ -22,4 +22,24 @@ Taking 8 equally distant points form the pedal press range, the measured raw val
 Wich can be reasonably adjusted by the curve:  
 `f(x) = 3e^x + 50`  
 
-Applying the inverse of that function to the raw values gives a reasonable linearization.
+![Potentiometer adjustment curve](./graphs/graph1.png)  
+
+Applying the inverse of that function to the raw values gives a perfect linearization, but very out of scale:  
+`f(x) = log(x - 50) - ln(3)`  
+
+![Potentiometer curve linearization](./graphs/graph2.png)  
+
+By correcting some constants, a better scaled linearization function can be defined:  
+`f(x) = log(x - 45) * 50`  
+
+![Potentiometer curve linearization correction](./graphs/graph3.png)  
+
+The last one is the function that the firmwate actually uses. 
+
+Another way to see the last function and it's constants meanings is the following:  
+`linearizedValue = log(rawValue - minimumValue) * slope`  
+Where:
+-  `linearizedValue` is the value after the linearization
+-  `rawValue` is the potentiometer raw reading
+-  `minimumValue` is the raw value of the potentiometer when the pedal is not pressed (that's necessary to avoid taking the logarithm of a negative value)
+-  `slope` is the slope of the linearized line (a higher value will give a better signal resolution, and a lower value will give a lower relative error)
