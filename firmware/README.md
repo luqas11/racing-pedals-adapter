@@ -42,4 +42,4 @@ Where:
 -  `linearizedValue` is the value after the linearization
 -  `rawValue` is the potentiometer raw reading
 -  `minimumValue` is the raw value of the potentiometer when the pedal is not pressed (that's necessary to avoid taking the logarithm of a negative value)
--  `slope` is the slope of the linearized line (a higher value will give a better signal resolution, and a lower value will give a lower relative error)
+-  `slope` is the slope of the linearized line (a higher value will give a better signal resolution, and a lower value will give lower aproximation errors)
